@@ -51,11 +51,32 @@ def load_feature_names():
         return json.load(f)
 
 
-st.title("🪐 Kepler Exoplanet Classification")
-st.markdown(
-    "Machine Learning Assignment 2 | "
-    "Multiclass Exoplanet Classification"
-)
+# Application Header
+header_left, header_right = st.columns([3, 1.2])
+
+with header_left:
+    st.title("🪐 Kepler Exoplanet Classification")
+    st.markdown(
+        "BITS - Machine Learning Assignment-2 | "
+        "Multiclass Exoplanet Classification"
+    )
+
+with header_right:
+    st.markdown(
+        """
+        <div style="
+            text-align: right;
+            padding-top: 15px;
+            font-size: 14px;
+            line-height: 1.8;
+        ">
+            <b>Name:</b> Mahesh Kandagatla<br>
+            <b>BITS ID:</b> 2026AJ05552<br>
+            <b>Email:</b> 2026aj05552@wilp.bits-pilani.ac.in
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
 
 st.divider()
 
