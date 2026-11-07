@@ -240,15 +240,60 @@ try:
             report_df.round(4),
             use_container_width=True,
         )
+        # Dynamic Model Performance Analysis
+    st.subheader("Model Performance Analysis")
 
-    st.subheader("📊 Model Performance Analysis")
+    # Calculate recall for the CANDIDATE class
+    candidate_mask = y_true == "CANDIDATE"
+    candidate_total = candidate_mask.sum()
 
-    st.info(
-        "The Decision Tree achieves 73.82% accuracy and 0.6985 Macro F1. "
-        "Candidate classification remains challenging due to possible feature "
-        "overlap and class imbalance. Group-aware cross-validation "
-        "supports the model selection."
+    candidate_correct = (
+        (y_pred == "CANDIDATE") & candidate_mask.to_numpy()
+    ).sum()
+
+    candidate_recall = (
+        candidate_correct / candidate_total
+        if candidate_total > 0 else 0
     )
+
+    # Identify class imbalance
+    class_distribution = y_true.value_counts(normalize=True)
+    majority_class = class_distribution.idxmax()
+    majority_percentage = class_distribution.max() * 100
+
+    # Generate model-specific analysis
+    analysis = (
+        f"{selected_model} achieves {metrics['Accuracy']:.2%} accuracy "
+        f"and {metrics['F1']:.4f} Macro F1. "
+        f"CANDIDATE recall is {candidate_recall:.2%}. "
+        f"The {majority_class} class represents "
+        f"{majority_percentage:.1f}% of observations. "
+    )
+
+    # Interpret candidate recall
+    if candidate_total == 0:
+        analysis += (
+            "No CANDIDATE observations are available "
+            "for class-specific evaluation."
+        )
+    elif candidate_recall < 0.40:
+        analysis += (
+            "Low candidate recall indicates difficulty "
+            "identifying potential exoplanets."
+        )
+    elif candidate_recall < 0.70:
+        analysis += (
+            "Moderate candidate recall suggests "
+            "room for classification improvement."
+        )
+    else:
+        analysis += (
+            "Strong candidate recall indicates "
+            "effective identification of potential exoplanets."
+        )
+
+    st.info(analysis)
+    
 
     st.divider()
 
