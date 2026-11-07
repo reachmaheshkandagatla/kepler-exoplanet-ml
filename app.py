@@ -241,6 +241,15 @@ try:
             use_container_width=True,
         )
 
+    st.subheader("📊 Model Performance Analysis")
+
+    st.info(
+        "The Decision Tree achieves 73.82% accuracy and 0.6985 Macro F1. "
+        "Candidate classification remains challenging due to possible feature "
+        "overlap and class imbalance. Group-aware cross-validation "
+        "supports the model selection."
+    )
+
     st.divider()
 
     st.subheader("Prediction Results")
