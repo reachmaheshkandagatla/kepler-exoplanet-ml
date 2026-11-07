@@ -200,7 +200,9 @@ try:
     }
 
     st.success(
-        f"Evaluation completed using {selected_model}!"
+        f"Evaluation completed using {selected_model}! "
+        "To evaluate other models, use the 'Select Classification Model' "
+        "dropdown in the left sidebar."
     )
 
     st.subheader("Model Performance")
