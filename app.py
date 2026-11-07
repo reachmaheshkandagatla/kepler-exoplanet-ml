@@ -64,6 +64,7 @@ st.sidebar.header("Model Configuration")
 selected_model = st.sidebar.selectbox(
     "Select Classification Model",
     list(MODEL_FILES.keys()),
+    index=1
 )
 
 st.sidebar.info(
@@ -71,12 +72,26 @@ st.sidebar.info(
     "and the koi_disposition target column."
 )
 
-uploaded_file = st.file_uploader(
-    "Upload Labeled Test Dataset",
-    type=["csv"],
+st.sidebar.header("Dataset Selection")
+
+dataset_mode = st.sidebar.radio(
+    "Choose Dataset",
+    ["Demo Dataset", "Upload CSV"]
 )
 
-if uploaded_file is not None:
+if dataset_mode == "Demo Dataset":
+    df = pd.read_csv(BASE_DIR / "data" / "test_data.csv")
+    st.success("Demo dataset loaded automatically: 1,902 observations")
+
+else:
+    uploaded_file = st.file_uploader(
+        "Upload Labeled Test Dataset",
+        type=["csv"]
+    )
+
+    if uploaded_file is None:
+        st.info("Upload a CSV to evaluate the model.")
+        st.stop()
 
     try:
         df = pd.read_csv(uploaded_file)
