@@ -4,6 +4,7 @@
 **Name:** Mahesh Kandagatla  
 **BITS ID:** 2026AJ05552
 
+**Kaggle Data:** https://www.kaggle.com/datasets/nasa/kepler-exoplanet-search-results
 **Live application:** https://kepler-exoplanet-ml.streamlit.app/  
 **GitHub repository:** https://github.com/reachmaheshkandagatla/kepler-exoplanet-ml
 
