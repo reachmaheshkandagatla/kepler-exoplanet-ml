@@ -120,7 +120,10 @@ kepler-exoplanet-ml/
 ├── requirements.txt
 ├── README.md
 ├── data/
+│   ├── space_data.csv
 │   └── test_data.csv
+├── notebooks/
+│   └── model_experiments.ipynb
 └── models/
     ├── decision_tree.joblib
     ├── logistic_regression.joblib
